@@ -3,7 +3,7 @@ const router = new Router();
 
 const Category = require('../models').category;
 const Product = require('../models').product;
-const correctIdChecker = require('../middleware/correctIdChecker');
+const correctIdChecker = require('../middlewares/correctIdChecker');
 
 router.get('/categories', correctIdChecker, async (req, res, next) => {
     try {

@@ -2,7 +2,7 @@ const {Router} = require("express");
 const router = new Router();
 
 const Product = require('../models').product;
-const correctIdChecker = require('../middleware/correctIdChecker');
+const correctIdChecker = require('../middlewares/correctIdChecker');
 
 router.get('/products', correctIdChecker, async (req, res, next) => {
     try {
