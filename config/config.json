@@ -1,6 +1,6 @@
 {
   "development": {
-    "url": "postgres://ylcdumcu:aseaqdXAp8dkNJJcZ5OpjgmdO6SuyETr@kandula.db.elephantsql.com:5432/ylcdumcu",
+    "url": "postgres://epdmaxio:jMc6xkKf0s_uwqVuY4xFGzHXDZfZbiIA@kandula.db.elephantsql.com:5432/epdmaxio",
     "dialect": "postgres",
     "operatorsAliases": "0"
   },
