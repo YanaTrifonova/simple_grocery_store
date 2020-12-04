@@ -20,23 +20,22 @@ router.post('/orders/', async (req, res, next) => {
                                                       .send("it is not enough items of good you want to order");
 
         const category = await Category.findOne({where: {id: product.categoryId}});
-        const categoryName = category.categoryName;
-        const productName = product.productName;
-        const numberOfItems = product.numberOfItems;
-        const price = product.price;
-        const createdAt = Date.now();
-        const updatedAt = Date.now();
 
         const newOrder = await Order.create({
             userId: USERID,
-            categoryName: categoryName,
-            productName: productName,
-            numberOfItems: numberOfItems,
-            price: price,
-            createdAt: createdAt,
-            updatedAt: updatedAt
+            categoryName: category.categoryName,
+            productName: product.productName,
+            numberOfItems: product.numberOfItems,
+            price: product.price,
+            createdAt: Date.now(),
+            updatedAt: Date.now()
         });
 
+        const updatedProduct = await Product.update(
+            {numberOfItems: product.numberOfItems - count}, {where: {id: product.id}}
+        );
+
+        res.send(updatedProduct);
         res.send(newOrder);
 
     } catch (e) {
