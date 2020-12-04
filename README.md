@@ -14,8 +14,5 @@ App works on localhost/4000
 
 Stack:
 - Node.js
-- Postgres Database
-- express
-- cors
-- sequelize
-- sequelize cli
+- Express.js
+- PostgreSQL
