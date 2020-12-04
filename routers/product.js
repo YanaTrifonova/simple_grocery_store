@@ -2,8 +2,9 @@ const {Router} = require("express");
 const router = new Router();
 
 const Product = require('../models').product;
+const correctIdChecker = require('../middleware/correctIdChecker');
 
-router.get('/products', async (req, res, next) => {
+router.get('/products', correctIdChecker, async (req, res, next) => {
     try {
         const products = await Product.findAll();
 
@@ -16,7 +17,7 @@ router.get('/products', async (req, res, next) => {
     }
 })
 
-router.get('/products/:id', async (req, res, next) => {
+router.get('/products/:id', correctIdChecker, async (req, res, next) => {
     try {
         const productId = parseInt(req.params.id);
         const product = await Product.findByPk(productId);

@@ -3,8 +3,9 @@ const router = new Router();
 
 const Category = require('../models').category;
 const Product = require('../models').product;
+const correctIdChecker = require('../middleware/correctIdChecker');
 
-router.get('/categories', async (req, res, next) => {
+router.get('/categories', correctIdChecker, async (req, res, next) => {
     try {
         const categories = await Category.findAll();
 
@@ -17,7 +18,7 @@ router.get('/categories', async (req, res, next) => {
     }
 })
 
-router.get('/categories/:id', async (req, res, next) => {
+router.get('/categories/:id', correctIdChecker, async (req, res, next) => {
     try {
         const categoryId = parseInt(req.params.id);
         const category = await Category.findByPk(categoryId);
@@ -31,7 +32,7 @@ router.get('/categories/:id', async (req, res, next) => {
     }
 })
 
-router.get('/categories/:id/products', async (req, res, next) => {
+router.get('/categories/:id/products', correctIdChecker, async (req, res, next) => {
     try {
         const categoryId = parseInt(req.params.id);
         const category = await Product.findAll({where : {categoryId : categoryId}});
