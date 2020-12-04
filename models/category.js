@@ -10,13 +10,13 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     category.init({
-                      categoryName: {
-                          type: DataTypes.STRING,
-                          allowNull: false
-                      },
-                  }, {
-                      sequelize,
-                      modelName: 'category',
-                  });
+        categoryName: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+    }, {
+        sequelize,
+        modelName: 'category',
+    });
     return category;
 };

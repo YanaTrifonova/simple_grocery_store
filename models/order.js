@@ -10,28 +10,28 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     order.init({
-                   userId: {
-                       type: DataTypes.INTEGER,
-                   },
-                   categoryName: {
-                       type: DataTypes.STRING,
-                       allowNull: false
-                   },
-                   productName: {
-                       type: DataTypes.STRING,
-                       allowNull: false
-                   },
-                   numberOfItems: {
-                       type: DataTypes.INTEGER,
-                       allowNull: false
-                   },
-                   price: {
-                       type: DataTypes.INTEGER,
-                       allowNull: false
-                   },
-               }, {
-                   sequelize,
-                   modelName: 'order',
-               });
+        userId: {
+            type: DataTypes.INTEGER,
+        },
+        categoryName: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        productName: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        numberOfItems: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        price: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+    }, {
+        sequelize,
+        modelName: 'order',
+    });
     return order;
 };
