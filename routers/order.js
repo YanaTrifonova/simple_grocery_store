@@ -5,10 +5,12 @@ const Order = require('../models').order;
 const Category = require('../models').category;
 const Product = require('../models').product;
 
+const correctIdChecker = require('../middlewares/correctIdChecker');
+
 //Fake Id const before we create an auth for new user
 const USERID = 1;
 
-router.post('/orders/', async (req, res, next) => {
+router.post('/orders', async (req, res, next) => {
     try {
         const productId = req.body.productId;
         const count = req.body.count;
@@ -37,6 +39,68 @@ router.post('/orders/', async (req, res, next) => {
 
         res.send(updatedProduct);
         res.send(newOrder);
+
+    } catch (e) {
+        next(e);
+    }
+})
+
+router.get('/orders', async (req, res, next)=>{
+    try {
+        const orders = await Order.findAll();
+        if (!orders) return res.status(404).send("no orders were found")
+
+        res.json(orders);
+    } catch (e) {
+        next(e);
+    }
+})
+
+router.get('/orders/:id', correctIdChecker, async (req, res, next)=>{
+    try {
+        const orderId = parseInt(req.params.id);
+        const order = await Order.findByPk(orderId);
+
+        if (!order) return res.status(404).send("this order id not found");
+
+        res.json(order);
+    } catch (e) {
+        next(e);
+    }
+})
+
+router.delete('/orders/:id', correctIdChecker, async (req, res, next) => {
+    try {
+        const orderId = parseInt(req.params.id);
+        const toDelete = await Order.findByPk(orderId);
+
+        if (!toDelete) {
+            return res.status(404).send(`Order with id:${orderId} not found`);
+        }
+        const deleted = await toDelete.destroy();
+        res.json(deleted);
+
+    } catch (e) {
+        next(e);
+    }
+})
+
+router.delete('/orders/users/:userId', async (req, res, next) => {
+    try {
+        const userId = parseInt(req.params.userId);
+        const toDelete = await Order.findAll({where: {userId: userId}});
+
+        console.log(toDelete);
+
+        if (!toDelete) {
+            return res.status(404).send(`Order of the user with id:${userId} not found`);
+        }
+
+        for (const item of toDelete) {
+            await item.destroy();
+        }
+
+        next();
 
     } catch (e) {
         next(e);
