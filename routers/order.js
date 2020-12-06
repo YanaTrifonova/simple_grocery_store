@@ -50,17 +50,6 @@ router.get('/orders', async (req, res, next) => {
         const orders = await Order.findAll();
         if (!orders) return res.status(404).send("no orders were found")
 
-        let total = 0;
-        console.log("------------------------------Your order-----------------------------");
-        orders.forEach((order, index) => {
-            let data = order.dataValues;
-            let totalItemPrice = data.price * data.numberOfItems;
-            console.log(
-                `${index}: ${data.numberOfItems} items of ${data.productName} for the price of ${data.price}$ each in total ${totalItemPrice}$`);
-            total = total + totalItemPrice;
-        });
-        console.log("----------------------Your total order is", total, "$----------------------");
-
         res.json(orders);
     } catch (e) {
         next(e);
@@ -69,10 +58,21 @@ router.get('/orders', async (req, res, next) => {
 
 router.get('/orders/:id', correctIdChecker, async (req, res, next) => {
     try {
-        const orderId = parseInt(req.params.id);
-        const order = await Order.findByPk(orderId);
+        const userId = parseInt(req.params.id);
+        const order = await Order.findAll({where : {userId : userId}});
 
         if (!order) return res.status(404).send("this order id not found");
+
+        let total = 0;
+        console.log("------------------------------Your order-----------------------------");
+        order.forEach((order, index) => {
+            let data = order.dataValues;
+            let totalItemPrice = data.price * data.numberOfItems;
+            console.log(
+                `${index}: ${data.numberOfItems} items of ${data.productName} for the price of ${data.price}$ each in total of ${totalItemPrice}$`);
+            total = total + totalItemPrice;
+        });
+        console.log("----------------------Your total order is", total, "$----------------------");
 
         res.json(order);
     } catch (e) {
