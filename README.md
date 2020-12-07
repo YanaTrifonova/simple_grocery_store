@@ -15,4 +15,7 @@ App works on localhost/4000
 Stack:
 - Node.js
 - Express.js
+- jsonwebtoken
+- Sequelize ORM
+- node.bcrypt.js
 - PostgreSQL
