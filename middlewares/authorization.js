@@ -1,8 +1,8 @@
 const User = require("../models").user;
-const { toData } = require("../authorization/jwt");
+const {toData} = require("../authorization/jwt");
 
 async function auth(req, res, next) {
-    const { authorization } = req.headers
+    const {authorization} = req.headers
     if (!authorization) return res.send('no authorization')
 
     const [bearer, token] = authorization.split(' ');

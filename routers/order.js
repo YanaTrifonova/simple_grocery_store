@@ -59,7 +59,7 @@ router.get('/orders', async (req, res, next) => {
 router.get('/orders/:id', correctIdChecker, async (req, res, next) => {
     try {
         const userId = parseInt(req.params.id);
-        const order = await Order.findAll({where : {userId : userId}});
+        const order = await Order.findAll({where: {userId: userId}});
 
         if (!order) return res.status(404).send("this order id not found");
 
