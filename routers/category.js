@@ -5,7 +5,7 @@ const Category = require('../models').category;
 const Product = require('../models').product;
 const correctIdChecker = require('../middlewares/correctIdChecker');
 
-router.get('/categories', correctIdChecker, async (req, res, next) => {
+router.get('/categories', async (req, res, next) => {
     try {
         const categories = await Category.findAll();
 
