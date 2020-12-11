@@ -10,9 +10,15 @@
 
 ### API and architecture of the app
 
-![](./pictures/aww-board%20(5).png?raw=true "My API")
+![](./pictures/aww-board%20(5).png "My API")
+###
+###
+### To run app use 
+### `$ nodemon`
 
-App works on localhost/4000
+Runs the app in the development mode.
+App works on http://localhost:3000
+use
 
 Stack:
 
